@@ -1,0 +1,29 @@
+<html>
+	<head>
+		<title>Report List</title>
+	</head>
+
+	<body>
+		<h1>Reports List: </h1>
+
+		{% if latest_reports %}
+
+		<ul>
+			{% for report in latest_reports %}
+			<li> 
+				{{ report.title }} <br>
+				{{ report.created_at }} <br>
+				{{ report.location }} <br>
+				{{ report.description }} <br>
+				{{ report.advice }} 
+
+			</li>
+			<hr>
+			{% endfor %}
+		</ul>
+
+		{% endif %}
+
+		
+	</body>
+</html>
