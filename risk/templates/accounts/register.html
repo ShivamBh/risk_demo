@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title>Login</title>
+	</head>
+
+	<body>
+		<h1>Register: </h1>
+
+		<p>Use the following form to register a new user:</p>
+		<form action="." method="post">
+			{{user_form.as_p}}
+			{% csrf_token %}
+			<input type="submit" value="Create new account">
+		</form>
+		
+
+		
+
+		
+	</body>
+</html>
