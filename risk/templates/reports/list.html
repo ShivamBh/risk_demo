@@ -4,12 +4,16 @@
 	</head>
 
 	<body>
+
+		{% if user.is_authenticated %}
 		<h1>Reports List: </h1>
+		
 
 		{% if latest_reports %}
-
+	
 		<ul>
 			{% for report in latest_reports %}
+			{% if current_loc.location == report.location %}
 			<li> 
 				{{ report.title }} <br>
 				{{ report.created_at }} <br>
@@ -18,10 +22,16 @@
 				{{ report.advice }} 
 
 			</li>
+			
 			<hr>
+			{% endif %}
 			{% endfor %}
 		</ul>
 
+		{% endif %}
+
+		{% else %}
+			<h1>Login <a href="{% url "accounts:login" %}">Here</a></h1>
 		{% endif %}
 
 		

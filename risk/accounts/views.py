@@ -47,12 +47,12 @@ def user_login(request):
 			if user is not None:
 				if user.is_active:
 					login(request, user)
-					return HttpResponse('Success')
+					return HttpResponseRedirect('reports/index.html')
 				else :
 					return HttpResponse('Disabled account')
 			else:
 				return HttpResponse('Invalid account')
 	else:
 		form = LoginForm()
-		print (current_user.id)
+
 	return render(request, 'accounts/login.html', {'form': form})

@@ -101,7 +101,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_PROFILE_MODULE = 'accounts.Profile'
+# AUTH_PROFILE_MODULE = 'accounts.Profile'
 
 
 # Internationalization

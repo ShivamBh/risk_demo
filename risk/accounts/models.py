@@ -6,7 +6,7 @@ from django.dispatch import receiver
 # Create your models here.
 
 class Profile(models.Model):
-	user = models.ForeignKey(User)
+	user = models.ForeignKey(User, related_name='profile')
 	location = models.CharField(max_length=150, blank=False, null=False)
 
 	def __str__(self):

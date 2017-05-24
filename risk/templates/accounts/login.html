@@ -4,16 +4,23 @@
 	</head>
 
 	<body>
-		<h1>Login: </h1>
-		<h1>{{ user.is_staff }}</h1>
 
-		<p>Use the following form to login:</p>
+		{% if user.is_authenticated %}
+			<h1>Hello, {{ user.username }}. You are logged in.</h1>
+			<h4>To view Reports, click <a href="{% url "reports:report_list" %}">Here</a>.</h4>
+		{% else %}
+			<h1>Login: </h1>
+			<!-- <h1>{{ user.username }}</h1> -->
 
-		<form action="." method="post">
-			{% csrf_token %}
-			{{ form.as_p }}
-			<p><input type="submit" value="Log-in"></p>
-		</form>
+			<p>Use the following form to login:</p>
+
+			<form action="." method="post">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<p><input type="submit" value="Log-in"></p>
+			</form>
+
+		{% endif %}
 	
 	</body>
 </html>
