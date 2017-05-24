@@ -9,6 +9,17 @@ class Profile(models.Model):
 	user = models.ForeignKey(User)
 	location = models.CharField(max_length=150, blank=False, null=False)
 
+	def __str__(self):
+		return self.user.username
+
+
+def create_user_profile(sender, instance, created, **kwargs):
+	if created:
+		Profile.objects.create(user=instance)
+
+post_save.connect(create_user_profile, sender=User)
+
+
 # @receiver(post_save, sender=User)
 # def create_user_profile(sender, instance, created, **kwargs):
 # 	if created:
