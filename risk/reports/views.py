@@ -24,9 +24,16 @@ from accounts.models import Profile
 
 class ReportList(ListView):
 	model = Report
-	queryset = Report.objects.all()
+
+	# queryset = Report.objects.filter(Q(location__icontains='nepal'))
 	context_object_name='reports'
 	template_name = 'list.html'
+
+	def get_queryset(self):
+		user_loc = self.request.user.profile.get().location
+		qs = super().get_queryset()
+		return qs.filter(Q(location__icontains=user_loc))
+
 
 class ReportDetail(DetailView):
 	model = Report
@@ -37,7 +44,8 @@ class ReportDetail(DetailView):
 	# pk_url_kwarg = 'report_id'
 	def get_context_data(self, *args, **kwargs):
 		context = super(ReportDetail, self).get_context_data(*args, **kwargs)
-		loc = get_object_or_404(ReportLoc)
+		report_pk = self.kwargs.get("pk")
+		loc = get_object_or_404(ReportLoc, pk=report_pk)
 		context["lat"] = loc.latitude
 		context["long"] = loc.longitude
 		return context
