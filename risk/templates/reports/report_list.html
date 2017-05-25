@@ -7,24 +7,27 @@
 
 		{% if user.is_authenticated %}
 		
-		<h1>Reports List: </h1>
-		
+		<h1>Hello, {{ request.user }}.</h1>
 
-		{% if latest_reports %}
+		<h1>Reports List: </h1>
+		<!-- {{ current_loc }}
+		{{ queryset }} -->
+		
+		{% if reports %}
 	
 		<ul>
-			{% for report in latest_reports %}
-			{% if current_loc.location == report.location %}
+			{% for query in reports %}
+			
 			<li> 
-				<a href="">{{ report.title }}</a> <br>
-				{{ report.created_at }} <br>
-				{{ report.location }} <br>
+				<a href="{% url "reports:report_detail" pk=query.id %}">{{ query.title }}</a> <br>
+				{{ query.created_at }} <br>
+				{{ query.location }} <br>
 				
 
 			</li>
 			
 			<hr>
-			{% endif %}
+			
 			{% endfor %}
 		</ul>
 

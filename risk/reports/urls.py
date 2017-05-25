@@ -1,7 +1,7 @@
 from django.conf.urls import url
-from reports import views
+from .views import ReportDetail, ReportList
 
 urlpatterns = [
-	url(r'^$', views.report_list_view, name="report_list"),
-	url(r'^detail$', views.report_detail_view, name="report_detail"),
+	url(r'^$', ReportList.as_view(), name="report_list"),
+	url(r'^(?P<pk>[0-9]+)/$', ReportDetail.as_view(), name="report_detail"),
 ]
