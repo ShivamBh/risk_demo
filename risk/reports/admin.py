@@ -1,5 +1,5 @@
 from django.contrib import admin
-from reports.models import Report
+from reports.models import Report, ReportLoc
 # Register your models here.
 
 class ReportAdmin(admin.ModelAdmin):
@@ -7,3 +7,4 @@ class ReportAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Report, ReportAdmin)
+admin.site.register(ReportLoc)

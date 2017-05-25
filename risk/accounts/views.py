@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.template import RequestContext
 
@@ -56,3 +57,9 @@ def user_login(request):
 		form = LoginForm()
 
 	return render(request, 'accounts/login.html', {'form': form})
+
+@login_required
+def user_logout(request):
+	logout(request)
+
+	return HttpResponseRedirect('accounts/login/')

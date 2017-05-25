@@ -6,6 +6,7 @@
 	<body>
 
 		{% if user.is_authenticated %}
+		
 		<h1>Reports List: </h1>
 		
 
@@ -15,11 +16,10 @@
 			{% for report in latest_reports %}
 			{% if current_loc.location == report.location %}
 			<li> 
-				{{ report.title }} <br>
+				<a href="">{{ report.title }}</a> <br>
 				{{ report.created_at }} <br>
 				{{ report.location }} <br>
-				{{ report.description }} <br>
-				{{ report.advice }} 
+				
 
 			</li>
 			

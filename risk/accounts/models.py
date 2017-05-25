@@ -9,6 +9,9 @@ class Profile(models.Model):
 	user = models.ForeignKey(User, related_name='profile')
 	location = models.CharField(max_length=150, blank=False, null=False)
 
+	class Meta:
+		permissions = (('customer_permission', 'Customers have permission to receove mail'),)
+
 	def __str__(self):
 		return self.user.username
 
