@@ -10,7 +10,7 @@
 
 		<h1>Reports Details: </h1>
 		
-		{{ lat }} | {{ long }}
+		<span id="lat">{{ lat }}</span> |  <span id="long">{{ long }}</span>
 		
 		<ul>
 			
@@ -18,7 +18,7 @@
 				{{ object.title }} <br>
 				{{ object.created_at }} <br>
 				{{ object.location }} <br>
-				{{ object.description }} <br>
+				<span id="rep_desc">{{ object.description }}</span> <br>
 				{{ object.advice }} 
 				
 			</li>
@@ -26,8 +26,38 @@
 			
 		</ul>
 
-		
+		<hr>
+
+		<h3>Map Plot:</h3>
+		<div id="gmaps" style="width: 400px; height: 400px; background-color: grey;"></div>
 
 		
+	<script>
+		function initMap() {
+			var desc = document.getElementById('rep_desc').innerHTML
+			var lat = Number(document.getElementById('lat').innerHTML);
+			var long = Number(document.getElementById('long').innerHTML);
+			// console.log(lat, long);
+			var loc = {lat: lat, lng: long};
+			var map = new google.maps.Map(document.getElementById('gmaps'), {
+				zoom : 14,
+				center : loc
+			});
+			var marker = new google.maps.Marker({
+				position : loc,
+				map : map
+			});
+			var infoWindow = new google.maps.InfoWindow({
+				content: desc
+			});
+			google.maps.event.addListener(marker, 'click', function() {
+				infoWindow.open(map, marker);
+			});
+		}
+
+
+	</script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgJUurxiT0EIMg9HDoO8vhDFHodnZDKVg&callback=initMap">
+    </script>	
 	</body>
 </html>
